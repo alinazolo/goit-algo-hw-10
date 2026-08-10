@@ -30,8 +30,6 @@ The result obtained using the Monte Carlo method is compared with:
 
 ### Comparison of the efficiency of the algorithms
 
-To compare the efficiency of the greedy algorithm and the dynamic programming algorithm, their execution time was measured.
-
 For the sum `113`, the following results were obtained:
 
 ```text
@@ -49,10 +47,6 @@ Both algorithms found the same optimal set of coins:
 ```text
 50 × 2 + 10 × 1 + 2 × 1 + 1 × 1 = 113
 ```
-
-The total number of coins used is 5.
-
-In this case, the greedy algorithm executed faster than the dynamic programming algorithm.
 
 To test the performance of the algorithms on a large amount, the value `100000` was used.
 
@@ -98,42 +92,11 @@ Quad error estimate: 2.9605947323337504e-14
 Difference between Monte Carlo and quad: 0.004506499155588983
 ```
 
-The Monte Carlo result is:
-
-\[
-I_{MC} \approx 2.6621602
-\]
-
-The result obtained using `quad` is:
-
-\[
-I_{quad} \approx 2.6666667
-\]
-
-The analytical result is:
-
-\[
-I = \frac{8}{3} \approx 2.6666667
-\]
-
-The absolute difference between the Monte Carlo result and the `quad` result is:
-
-\[
-|2.6621602 - 2.6666667|
-\approx 0.0045065
-\]
-
-The relative error of the Monte Carlo result is approximately:
-
-\[
-0.17\%
-\]
-
 ---
 
 ## Comparison of Results
 
-The `quad` result and the analytical result are practically identical:
+The `quad` result and the analytical result are identical:
 
 ```text
 Quad:       2.6666666666666665
@@ -151,8 +114,6 @@ is also very close to the exact value.
 A small difference is expected because the Monte Carlo method is based on randomly generated values. Therefore, the result may be slightly different each time the program is executed.
 
 Increasing the number of random points generally improves the accuracy of the Monte Carlo approximation.
-
-The `Quad error estimate` of approximately `2.96e-14` represents the numerical error estimate of the `quad` calculation itself. It should not be confused with the difference between the Monte Carlo and `quad` results.
 
 ---
 
