@@ -1,22 +1,38 @@
 # Project Structure
-- `task1_greed_dynamic_algorithm.py` —
-
-## Task 1 — Greedy and Dynamic Algorithms
-
-### Опис завдання
-
-This task implements two algorithms to determine the set of coins required to form a given sum.
+- `task1_greed_dynamic_algorithm.py` — this task implements two algorithms to determine the set of coins required to form a given sum.
 
 Two approaches are implemented:
 
 1. Greedy algorithm (`find_coins_greedy`)
 2. Dynamic programming algorithm (`find_min_coins`)
 
-## Порівняння ефективності алгоритмів
+- `task2_monte_carlo.py` — the purpose of this task is to calculate the definite integral of the function:
 
-Для порівняння ефективності жадібного алгоритму та алгоритму динамічного програмування було виміряно час їх виконання.
+\[
+f(x) = x^2
+\]
 
-Для суми `113` отримано такі результати:
+on the interval:
+
+\[
+[0, 2]
+\]
+
+using the **Monte Carlo method**.
+
+The result obtained using the Monte Carlo method is compared with:
+
+1. The result calculated using the `quad` function from the `scipy.integrate` module.
+2. The analytical value of the integral.
+
+
+## Task 1 — Greedy and Dynamic Algorithms
+
+### Comparison of the efficiency of the algorithms
+
+To compare the efficiency of the greedy algorithm and the dynamic programming algorithm, their execution time was measured.
+
+For the sum `113`, the following results were obtained:
 
 ```text
 Greedy Algorithm:
@@ -28,19 +44,19 @@ Dynamic Programming:
 Execution Time: 0.00003883 seconds
 ```
 
-Обидва алгоритми знайшли однаковий оптимальний набір монет:
+Both algorithms found the same optimal set of coins:
 
 ```text
 50 × 2 + 10 × 1 + 2 × 1 + 1 × 1 = 113
 ```
 
-Загальна кількість використаних монет дорівнює 5.
+The total number of coins used is 5.
 
-При цьому жадібний алгоритм виконався швидше за алгоритм динамічного програмування.
+In this case, the greedy algorithm executed faster than the dynamic programming algorithm.
 
-Для перевірки роботи алгоритмів на великій сумі було використано значення `100000`.
+To test the performance of the algorithms on a large amount, the value `100000` was used.
 
-Отримані результати:
+The results obtained:
 
 ```text
 Comparison for amount 100000:
@@ -49,74 +65,123 @@ Greedy: 0.00000104 seconds
 Dynamic programming: 0.03538325 seconds
 ```
 
-Різниця у швидкості стала значно більш помітною. У цьому запуску жадібний алгоритм виконався приблизно у 34 000 разів швидше за алгоритм динамічного програмування.
+The difference in speed became much more noticeable. The greedy algorithm ran approximately 34,000 times faster than the dynamic programming algorithm.
 
-Причина полягає у різній часовій складності алгоритмів.
+The reason lies in the different time complexity of the algorithms.
 
-### Жадібний алгоритм
+### Conclusion
 
-Жадібний алгоритм проходить по списку доступних номіналів:
-
-```python
-[50, 25, 10, 5, 2, 1]
-```
-
-Його часова складність:
-
-[
-O(k)
-]
-
-де `k` — кількість номіналів монет.
-
-У цьому завданні `k = 6`, тому величина самої суми майже не впливає на кількість основних ітерацій алгоритму.
-
-### Динамічне програмування
-
-Алгоритм динамічного програмування розраховує оптимальний результат для кожної проміжної суми від `1` до заданої суми та для кожної з них перевіряє доступні номінали монет.
-
-Його часова складність:
-
-[
-O(n \cdot k)
-]
-
-де:
-
-* `n` — задана сума;
-* `k` — кількість доступних номіналів.
-
-Для суми `100000` та 6 номіналів алгоритм виконує велику кількість перевірок, тому зі збільшенням суми час його роботи також збільшується.
-
-Крім того, динамічне програмування використовує додаткову пам'ять для зберігання результатів для проміжних сум. Його просторова складність становить:
-
-[
-O(n)
-]
-
-## Висновок
-
-Результати експерименту показали, що для набору монет:
+The results of the experiment showed that for the set of coins:
 
 ```python
 [50, 25, 10, 5, 2, 1]
 ```
 
-жадібний алгоритм є значно ефективнішим за часом виконання.
+the greedy algorithm is much more efficient in terms of execution time.
 
-Для суми `113` обидва алгоритми знайшли однакове оптимальне рішення з 5 монет, але жадібний алгоритм виконався швидше.
+For the amount `113`, both algorithms found the same optimal solution of 5 coins, but the greedy algorithm ran faster.
 
-При збільшенні суми до `100000` різниця у швидкості стала набагато більш помітною:
+When the amount is increased to `100000`, the difference in speed becomes much more noticeable.
+
+Thus, for the set of coins `[50, 25, 10, 5, 2, 1]` given in the problem, it is more appropriate to use the greedy algorithm due to its high speed and low memory requirements. Dynamic programming is advisable to use when it is necessary to find the optimal result for an arbitrary set of denominations with certainty.
+
+## Task 2. Monte Carlo Integration
+
+### Results
+The program produced the following results:
 
 ```text
-Greedy:              0.00000104 seconds
-Dynamic Programming: 0.03538325 seconds
+Monte Carlo result: 2.6621601675110775
+Quad result: 2.6666666666666665
+Analytical result: 2.6666666666666665
+Quad error estimate: 2.9605947323337504e-14
+Difference between Monte Carlo and quad: 0.004506499155588983
 ```
 
-Жадібний алгоритм ефективний для великих сум, оскільки його робота залежить в основному від кількості номіналів монет, а не від величини суми.
+The Monte Carlo result is:
 
-Динамічне програмування працює повільніше та потребує більше пам'яті, проте має важливу перевагу: воно гарантовано знаходить мінімальну кількість монет для довільного набору номіналів.
+\[
+I_{MC} \approx 2.6621602
+\]
 
-Жадібний алгоритм не завжди гарантує оптимальний результат для довільної системи монет. Наприклад, для набору `[4, 3, 1]` та суми `6` він вибере `4 + 1 + 1`, тобто 3 монети, тоді як оптимальне рішення — `3 + 3`, тобто 2 монети.
+The result obtained using `quad` is:
 
-Таким чином, для заданого у завданні набору монет `[50, 25, 10, 5, 2, 1]` доцільніше використовувати жадібний алгоритм через його високу швидкість та низькі вимоги до пам'яті. Динамічне програмування доцільно використовувати тоді, коли потрібно гарантовано знайти оптимальний результат для довільного набору номіналів.
+\[
+I_{quad} \approx 2.6666667
+\]
+
+The analytical result is:
+
+\[
+I = \frac{8}{3} \approx 2.6666667
+\]
+
+The absolute difference between the Monte Carlo result and the `quad` result is:
+
+\[
+|2.6621602 - 2.6666667|
+\approx 0.0045065
+\]
+
+The relative error of the Monte Carlo result is approximately:
+
+\[
+0.17\%
+\]
+
+---
+
+## Comparison of Results
+
+The `quad` result and the analytical result are practically identical:
+
+```text
+Quad:       2.6666666666666665
+Analytical: 2.6666666666666665
+```
+
+The Monte Carlo result:
+
+```text
+2.6621601675110775
+```
+
+is also very close to the exact value.
+
+A small difference is expected because the Monte Carlo method is based on randomly generated values. Therefore, the result may be slightly different each time the program is executed.
+
+Increasing the number of random points generally improves the accuracy of the Monte Carlo approximation.
+
+The `Quad error estimate` of approximately `2.96e-14` represents the numerical error estimate of the `quad` calculation itself. It should not be confused with the difference between the Monte Carlo and `quad` results.
+
+---
+
+## Conclusion
+
+The definite integral of the function:
+
+\[
+f(x) = x^2
+\]
+
+on the interval `[0, 2]` was successfully calculated using the Monte Carlo method.
+
+The Monte Carlo method produced:
+
+```text
+2.6621601675110775
+```
+
+while the `quad` function and analytical calculation produced:
+
+```text
+2.6666666666666665
+```
+
+The difference between the Monte Carlo approximation and the exact result is approximately `0.0045065`, with a relative error of about `0.17%`.
+
+The obtained results confirm that the Monte Carlo algorithm correctly approximates the value of the definite integral.
+
+The small difference between the Monte Carlo result and the exact value is caused by the random nature of the method. With a sufficiently large number of random points, the Monte Carlo estimate approaches the exact value.
+
+Therefore, the implemented Monte Carlo method can be considered correct for the calculation of this definite integral.
